@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-N38KJVLN');</script>
+<!-- End Google Tag Manager -->
 <!-- Meta Pixel Code -->
 <script>
 !function(f,b,e,v,n,t,s)
@@ -18,9 +27,6 @@ fbq('track', 'PageView');
 src="https://www.facebook.com/tr?id=2056677268287281&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
-  
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Wag & Wonderment Canine Club</title>
 
 <!-- Favicon -->
@@ -392,6 +398,10 @@ footer {
 </style>
 </head>
 <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N38KJVLN"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 
 <!-- NAV -->
 <nav>
@@ -419,7 +429,7 @@ footer {
   <div class="nav-right">
     <a href="#how" class="link">How It Works</a>
     <a href="#features" class="link">What's Inside</a>
-    <a href="https://wagandwonderment.circle.so/checkout/wag-and-wonderment-membership" class="btn-pill purple">Start free 30 days ✦</a>
+    <a href="https://wagandwonderment.circle.so/checkout/wag-and-wonderment-membership" onclick="fbq('track', 'InitiateCheckout')" class="btn-pill purple">Start free 30 days ✦</a>
   </div>
 </nav>
 
@@ -437,7 +447,7 @@ footer {
   <p class="hero-sub">If you've ever fallen down a late-night internet rabbit hole about your dog's behavior only to emerge more confused — welcome. We built this for you.</p>
 
   <div class="hero-cta">
-    <a href="https://wagandwonderment.circle.so/checkout/wag-and-wonderment-membership" class="btn-pill large">Start your free 30 days</a>
+    <a href="https://wagandwonderment.circle.so/checkout/wag-and-wonderment-membership" onclick="fbq('track', 'InitiateCheckout')" class="btn-pill large">Start your free 30 days</a>
     <a href="#how" class="btn-pill large secondary">See how it works</a>
   </div>
   <p class="hero-fine">Cancel any time · No pressure, no hassle</p>
@@ -571,7 +581,7 @@ footer {
     <p class="section-eyebrow reveal">Meet the Founders</p>
     <h2 class="reveal d1">"Think of us as your defacto best friends who know embarrassingly too much about dog behavior."</h2>
     <p class="reveal d2">Mary Tully Vega and Claire Anderson have 12+ years in dog training. They started Wag & Wonderment because their clients kept saying: "We wish we had somewhere to keep learning." This is that somewhere.</p>
-    <a href="https://wagandwonderment.circle.so/checkout/wag-and-wonderment-membership" class="btn-pill reveal d2" style="margin-top:1rem;">Join the club ✦</a>
+    <a href="https://wagandwonderment.circle.so/checkout/wag-and-wonderment-membership" onclick="fbq('track', 'InitiateCheckout')" class="btn-pill reveal d2" style="margin-top:1rem;">Join the club ✦</a>
   </div>
 </section>
 
@@ -587,12 +597,11 @@ footer {
     </div>
     <br>
     <span class="free-tag reveal">✦ First 30 days completely free</span><br>
-    <a href="https://wagandwonderment.circle.so/checkout/wag-and-wonderment-membership" class="btn-pill large reveal" style="margin-top:1rem;">Start your free month</a>
+    <a href="https://wagandwonderment.circle.so/checkout/wag-and-wonderment-membership" onclick="fbq('track', 'InitiateCheckout')" class="btn-pill large reveal" style="margin-top:1rem;">Start your free month</a>
     <p class="cta-sub reveal" style="color:#6b7280;margin-top:0.8rem;">Free for 30 days, then $8/month or $6/month with annual billing.</p>
   </div>
 </section>
 
-<!-- DARK CTA -->
 <!-- FOOTER -->
 <footer>
   <div class="footer-mark">
@@ -614,14 +623,14 @@ const obs = new IntersectionObserver(entries => {
 }, { threshold: 0.08 });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-function handleJoin() {
-  const inp = document.getElementById('cta-email');
-  if (!inp.value || !inp.value.includes('@')) { inp.style.borderColor = '#FF6E66'; inp.focus(); return; }
-  const btn = inp.nextElementSibling;
-  btn.textContent = 'You\'re in!';
-  btn.style.background = '#5a9e7a';
-  inp.disabled = true; btn.disabled = true;
-}
+// Meta Pixel: ViewContent when the pricing section scrolls into view (fires once)
+const pricingObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { fbq('track', 'ViewContent', { content_name: 'Pricing' }); pricingObs.disconnect(); }
+  });
+}, { threshold: 0.3 });
+const pricingEl = document.getElementById('pricing');
+if (pricingEl) pricingObs.observe(pricingEl);
 </script>
 
 <!-- Vercel Analytics -->
